@@ -1,31 +1,11 @@
-var students = []; 
+const express = require('express');
+const path = require('path');
+const app = express();
 
-function addStudent(rowNum, name, location, cgpa) {
-  var student = { rowNum: rowNum, name: name, location: location, cgpa: cgpa };
-  students.push(student);
-}
-
-function removeStudent(rowNum) {
-  for (var i = 0; i < students.length; i++) {
-    if (students[i].rowNum === rowNum) {
-      students.splice(i, 1);
-      return;
-    }
-  }
-}
-
-function addRow() {
-  var rowNum = students.length + 1;
-  var name = ""; 
-  var location = ""; 
-  var cgpa = ""; 
-  addStudent(rowNum, name, location, cgpa);
-
-  
-}
-
-function deleteRow(rowNum) {
-  removeStudent(rowNum);
-
-
-}
+app.use(express.static('public'));
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'));
+});
+app.listen(3000, function() {
+  console.log('Express server is running on localhost:3000');
+});
